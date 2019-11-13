@@ -35,50 +35,35 @@
         mov result[si], dx
     loop addition
     
-    jnc printing
+    jnc output
 
     ;---------------print carry if any-----------------
     mov dl, 31h
     mov ah, 02h
     int 21h
     ;--------------------------------------------------
-
-    mov cx, 2
-    printing:
-        mov bx, result[si]
-        mov tempCount, cx
-        mov cx, 4
-            printDigit:
-                rol bx, 4
-                mov dl, bl
-                and dl, 0fh
-                add dl, 30h
-                cmp dl, 39h
-                jbe print
-                add dl, 07h
-                print:
-                    mov ah, 02h
-                    int 21h
-            loop printDigit
-            
-        inc si
-        inc si
-        mov cx, tempCount
-        loop printing
-
-        ; mov bx, result[si]
-        ; mov cx, 4
-        ;     printDigit2:
-        ;         rol bx, 4
-        ;         mov dl, bl
-        ;         and dl, 0fh
-        ;         add dl, 30h
-        ;         cmp dl, 39h
-        ;         jbe print2
-        ;         add dl, 07h
-        ;         print2:
-        ;             mov ah, 02h
-        ;             int 21h
-        ;     loop printDigit2
+    
+    output:
+        mov cx, 2
+        printing:
+            mov bx, result[si]
+            mov tempCount, cx
+            mov cx, 4
+                printDigit:
+                    rol bx, 4
+                    mov dl, bl
+                    and dl, 0fh
+                    add dl, 30h
+                    cmp dl, 39h
+                    jbe print
+                    add dl, 07h
+                    print:
+                        mov ah, 02h
+                        int 21h
+                    loop printDigit
+            inc si
+            inc si
+            mov cx, tempCount
+            loop printing
     .exit
 end
