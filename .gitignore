@@ -1,0 +1,8 @@
+*.exe
+*.obj
+*.map
+*.bat
+*.ovl
+*.com
+*.dll
+tasm
